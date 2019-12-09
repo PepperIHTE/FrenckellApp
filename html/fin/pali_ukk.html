@@ -1,0 +1,136 @@
+<!doctype html>
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fi" lang="fi">
+	<head>
+			<meta charset="utf-8">
+			<title>TTY-Robot</title>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+			<meta name="viewport" content="width=1280, user-scalable=0">
+			<script src="/libs/qimessaging/1.0/qimessaging.js"></script>
+		
+			<link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Ubuntu" rel="stylesheet"> 
+		
+		<link rel="apple-touch-icon" sizes="57x57" href="<?= SITEPATH ?>img/ico/apple-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="<?= SITEPATH ?>img/ico/apple-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="<?= SITEPATH ?>img/ico/apple-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="<?= SITEPATH ?>img/ico/apple-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="<?= SITEPATH ?>img/ico/apple-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="<?= SITEPATH ?>img/ico/apple-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="<?= SITEPATH ?>img/ico/apple-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="<?= SITEPATH ?>img/ico/apple-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="<?= SITEPATH ?>img/ico/apple-icon-180x180.png">
+		<link rel="icon" type="image/png" sizes="192x192"  href="<?= SITEPATH ?>img/ico/android-icon-192x192.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="<?= SITEPATH ?>img/ico/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="<?= SITEPATH ?>img/ico/favicon-96x96.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="<?= SITEPATH ?>img/ico/favicon-16x16.png">
+		<link rel="manifest" href="<?= SITEPATH ?>img/ico/manifest.json">
+
+
+		<link href="../site/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+		<link href="../site/css/pali_style.css" rel="stylesheet" type="text/css">	
+		<script src="../site/js/bootstrap.min.js"></script>
+			<link href="../site/web-fonts-with-css/css/fontawesome-all.min.css" rel="stylesheet">
+	</head>
+	
+
+<body class="bg-primary">
+	<header class="section1">
+		<div class="container-fluid">
+			<div class="row">
+				<div id="title_select" style="display:block">
+					<h2 id="page_title" class="col-xs-9">PALI - Usein Kysyttyä</h2>
+				</div>
+				<nav class="col-xs-3">
+					<a onclick="quit()" class="float-right"><i class="text-shadow fas fa-times-circle fa-3x"></i></a>	
+					<a id="back_btn" onclick="back()" class="float-right"><i class="text-shadow fas fa-arrow-alt-circle-left fa-3x"></i></a>
+				</nav>	
+			</div>
+		</div>	
+	</header>	
+
+	<div class="container">
+		<div class="row"><div class="col-xs-12"></div></div>
+			<div class="row section-main navi">
+			<div class="col-xs-12 smallbuttons-area">
+				<a onclick="answer(0)" class="box-shadow button text-center">
+					<h4>Paljonko kyyti <br>maksaa?</h4>
+				</a>
+					<a onclick="answer(1)" class="box-shadow button text-center">
+					<h4>Mistä kyydin<br> voi tilata?</h4>
+				</a>
+				<a onclick="answer(2)" class="box-shadow button text-center">
+					<h4>Pääseekö PALIlla <br>kotiovelta sairaalaan?</h4>
+				</a>
+				<a onclick="answer(3)" class="box-shadow button text-center">
+					<h4>Tuleeko PALI-auto <br>hakemaan kotiovelta?</h4>
+				</a>
+					<a onclick="answer(4)" class="box-shadow button text-center">
+					<h4>Ottaako PALI<br> kyytiin, jos heilutan<br> kättä tien varrella?</h4>
+				</a>
+					<a onclick="answer(5)" class="box-shadow button text-center">
+					<h4>Kenelle PALI <br>on tarkoitettu?</h4>
+				</a>
+					<a onclick="answer(6)" class="box-shadow button text-center">
+					<h4>Liikkuuko PALI <br>vain aamuisin?</h4>
+				</a>
+					<a onclick="answer(7)" class="box-shadow button text-center">
+					<h4>Kulkeeko PALI <br>vain arkisin?</h4>
+				</a>
+			</div>
+
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12"><img src="../site/img/arrowdown.png" class="text-center small-v-padding"></div>
+		<div class="col-xs-10 col-xs-offset-1">
+			<p id="help_text" style="font-size:30px;"></p>
+		</div>			
+	</div>
+	<script>
+		var session = new QiSession();
+		var audio = new Audio('../change_screen.ogg');
+		var answers = 	[
+							["Saman verran kuin tavallinen bussi eli senioribussikortilla 94 senttiä ja käteisellä 3 euroa. Myös kuukausikortilla pääsee nousemaan kyytiin.​","Saman verran kuin tavallinen bussi.​"],
+							["Riippuu alueesta, jolla liikut. Puhelinnumero löytyy kunkin linjan esitteestä, joita löytyy telineestä. Voit kysyä apua myös Kotitorilta, tuolta tilan takaosasta.​","Soittamalla palvelunumeroon saat vastauksen"],
+							["Mikäli asut kauempana, voit joutua vaihtamaan PALI-kyydistä toiseen. Apua saa palvelunumeroista.​","Voit varmistaa PALI palvelunumerosta"],
+							["Riippuu missä asut. Joillain alueilla tämä on mahdollista. Kannattaa tutkailla karttoja yhdessä Kotitorin henkilöstön kanssa, tuolla tilan takaosassa.​","Rippuu asuinalueestasi. Voit varmistaa Kotitorilta"],
+							["Auton kyytiin pääsee matkan varrelta, jos pysähtyminen on mahdollista.​","Kyllä, jos pysähtyminen on mahdollista"],
+							["PALI on tarkoitettu kaikille, joille tavallisilla busseilla kulkeminen on hankalaa. Sen käyttämiseen ei tarvita lupaa eikä lääkärintodistuksia.​","PALIa voi käyttää kuka vain"],			
+							["PALI-autot kulkevat pääasiassa klo 8.30-14.30, osa autoista vähän pidempäänkin.","PALIt kulkevat pääasiassa kello 8.30-14.30"],
+							["PALI 17 on liikkeellä myös lauantaisin ja sunnuntaisin aamusta noin viiteen asti. Se kulkee Sokoksen, Kaupin ja Kalevan väliä","PALI 17 kulkee myös viikonloppuisin"]
+						]
+	
+		function quit(){
+			audio.play();
+			session.service('ALMemory').done(function(ALMemory) {
+				ALMemory.raiseEvent("orientation/silence", 1);
+			});
+			session.service('ALMemory').done(function(ALMemory) {
+				ALMemory.raiseEvent("Orientation/Exit", 0);
+			});
+		}
+		
+		function back(){
+			audio.play();
+			session.service('ALMemory').done(function(ALMemory) {
+				ALMemory.raiseEvent("orientation/silence", 1);
+			});
+			session.service('ALMemory').done(function(ALMemory) {
+				ALMemory.raiseEvent("orientation/pali_back", 0);
+			});
+		}
+		
+		function answer(i){
+			text = answers[i][0];
+			voice = answers[i][1];
+			document.getElementById("help_text").innerHTML = text;
+			session.service('ALMemory').done(function(ALMemory) {
+				ALMemory.raiseEvent("orientation/silence", 1);
+			});
+			session.service('ALMemory').done(function(ALMemory) {
+				ALMemory.raiseEvent("orientation/say_", voice);
+			});
+			
+		}
+	</script>
+</body>
+</html>

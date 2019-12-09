@@ -1,0 +1,12 @@
+topic: ~happenings()
+language: fif
+
+concept:(lines) ^rand["Toivottavasti löysit jotain mieleistä" "Voit selailla tapahtumia myös Visit Tampereen kosketusnäytöltä" "Toivottavasti nähdään jossain tapahtumassa lähiaikoina" "Oli kiva katsella tapahtumia yhdessä"]
+
+u:(e:onStart) $html="fin/happenings_index_test.html" Hetkinen, haen tapahtumia parhaillaan. ^gotoReactivate(start)
+
+u:(e:Orientation/Exit) ^gotoRandom(ending)
+u:([poistu takaisin lopeta exit]) $Orientation/Exit=1
+
+proposal: %ending ~lines $onStopped=1
+proposal: %ending $onStopped=1

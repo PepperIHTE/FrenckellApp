@@ -1,0 +1,54 @@
+topic: ~ExampleDialog()
+language: enu
+
+concept:(idle_action) ^rand[$idle1=1 $idle2=1]
+concept:(agree)[right "o k" OK sure ]
+concept:(affirmation) [yes yep sure yeah aha]
+concept:(denial) [no dont]
+concept:(fine)[good well OK fine]
+concept:(bad)[bad "not good"]
+
+u:(e:onStart) $html="en/start-en.html"
+
+u:(quiz) ^rand[~agree], launching quiz $orientation/startapp=0 
+u:([frenckell "frenckell info"]) ^rand[~agree], launching guidance $orientation/startapp=1 
+u:([events]) ^rand[~agree] $orientation/startapp=2 
+ 
+u:(e:Dialog/NoOneSpeak20) ^gotoReactivate(zone1)   
+
+proposal: %zone2 
+    u1:(e:EngagementZones/PersonEnteredZone2) ^gotoReactivate(zone1) $track=1
+    u1:(e:Dialog/NoOneSpeak20) ~idle_action
+    
+proposal: %zone1
+    u1:(e:EngagementZones/PersonEnteredZone1) ^gotoRandom(greeting)
+    
+    
+proposal: %greeting Would you like to try out a quiz?
+    u1:(~affirmation) Awesome! $orientation/startapp=0
+    u1:(~denial) Ok.
+    u1:(e:Dialog/NoOneSpeak10) \pau=500\
+    
+proposal: %greeting Can I help you find a service you're looking for?
+    u1:(~affirmation) Great! $orientation/startapp=1
+    u1:(~denial) Ok.
+    u1:(e:Dialog/NoOneSpeak10) \pau=500\
+    
+proposal: %greeting There are lots of events at Tampere, do you want to hear more about them?
+    u1:(~affirmation) Great! $orientation/startapp=2
+    u1:(~denial) Ok.
+    u1:(e:Dialog/NoOneSpeak10) \pau=500\
+    
+proposal: %greeting With me, you can play a quiz, get to know local events, or learn about the services at Frenckell.
+    
+proposal: %greeting I can tell what’s happening this week in Tampere
+    u1:([~affirmation] tell ok) Great! $orientation/startapp=2
+    u1:(~denial) Ok.
+    u1:(e:Dialog/NoOneSpeak10) \pau=500\
+    
+proposal: %greeting Hi! How is it going?
+    u1:(~fine) That's nice to hear!
+    u1:(~bad) Can i cheer you up with a quiz?
+        u2:(~affirmation) $orientation/startapp=1
+    u1:(e:Dialog/NoOneSpeak10) \pau=500\
+    

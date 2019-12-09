@@ -1,0 +1,12 @@
+topic: ~happenings()
+language: enu
+
+concept:(lines) ^rand["Hope you found something nice" "You can continue browsing events also on the Visit Tampere touchscreen" "Hope to see you at some event in the near future" "It was nice to see together what's happening in Tampere"]
+
+u:(e:onStart) $html="en/happenings_index_test.html" Just a second, processing ^gotoReactivate(start)
+
+u:(e:Orientation/Exit) ^gotoRandom(ending)
+u:([exit]) $Orientation/Exit=1
+
+proposal: %ending ~lines $onStopped=1
+proposal: %ending $onStopped=1

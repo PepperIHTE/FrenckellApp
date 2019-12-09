@@ -1,0 +1,22 @@
+topic: ~Greeting()
+language: fif
+
+concept:(idle_action) ^rand[$idle1=1 $idle2=1]
+
+concept:(greeting) ^rand["Haluaisitko kokeilla tietovisaa" "Voisinko auttaa teitä löytämään oikean palvelupisteen" "Hei, miten menee?" "Voisinko olla avuksi?" "Hyvää päivää!"]
+concept:(affirmation) [kyllä joo tahdon haluan toki juu]
+
+u:(e:onStart) ^goto(thewait)
+u:(hei moi terve tervehdys) Hei vain. 
+
+proposal: %thewait
+    u1:(e:EngagementZones/PersonEnteredZone2) ^gotoReactivate(wait)
+
+proposal: %wait
+    u1:(e:Dialog/NoOneSpeak20) ~idle_action ^gotoReactivate(thewait)
+    u1:(e:EngagementZones/PersonEnteredZone1) ~greeting
+        u2:(~affirmation) Mahtavaa, voit 
+        u2:(e:Dialog/NoOneSpeak20) ^gotoReactivate(thewait)
+
+
+        

@@ -1,0 +1,170 @@
+<!doctype html>
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fi" lang="fi">
+	<head>
+			<meta charset="utf-8">
+			<title>PALI - Palveluliikenne</title>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+			<meta content='width=1280, user-scalable=0' name='viewport' />
+			<script src="/libs/qimessaging/1.0/qimessaging.js"></script>
+		
+	<link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Ubuntu" rel="stylesheet"> 
+		
+		<link rel="apple-touch-icon" sizes="57x57" href="<?= SITEPATH ?>img/ico/apple-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="<?= SITEPATH ?>img/ico/apple-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="<?= SITEPATH ?>img/ico/apple-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="<?= SITEPATH ?>img/ico/apple-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="<?= SITEPATH ?>img/ico/apple-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="<?= SITEPATH ?>img/ico/apple-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="<?= SITEPATH ?>img/ico/apple-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="<?= SITEPATH ?>img/ico/apple-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="<?= SITEPATH ?>img/ico/apple-icon-180x180.png">
+		<link rel="icon" type="image/png" sizes="192x192"  href="<?= SITEPATH ?>img/ico/android-icon-192x192.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="<?= SITEPATH ?>img/ico/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="<?= SITEPATH ?>img/ico/favicon-96x96.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="<?= SITEPATH ?>img/ico/favicon-16x16.png">
+		<link rel="manifest" href="<?= SITEPATH ?>img/ico/manifest.json">
+
+
+		<link href="../site/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+		<link href="../site/css/style.css" rel="stylesheet" type="text/css">	
+		<script src="../site/js/bootstrap.min.js"></script>
+		<link href="../site/web-fonts-with-css/css/fontawesome-all.min.css" rel="stylesheet">
+		<style>
+		</style>
+	</head>
+	
+
+<body class="bg-primary">
+	<header class="section1">
+		<div class="container-fluid">
+			<div class="row">
+				<h1 id="page_title" class="col-xs-9">PALI - Palveluliikenne</h1>
+				<nav class="col-xs-3">
+					<a onclick="quit()" class="float-right"><i class="text-shadow fas fa-times-circle fa-3x"></i></a>
+					<a id="back_btn" onclick="back()" style="display:none" class="float-right"><i class="text-shadow fas fa-arrow-alt-circle-left fa-3x"></i></a>
+				</nav>	
+			</div>
+		</div>
+		
+	</header>	
+	<div style="margin:100px">
+		<div class="row section-main navi" id="main1">
+			<div class="row col-sm-6" id="find">
+				<div class="row">
+					<h2> Hae oman alueen PALI-linjoja </h2>
+				</div>
+				<input type="text" style="color:black" id="route_finder_input"></input>
+				<input type="button" class="unselected_btn" value="Hae" onclick="search_routes()"></input>
+			</div>
+			<span class="img-right">
+				<button onclick="show_routes()">Näytä<br>kaikki<br>reitit</button>
+			</span>
+		</div>
+		<div class="row" id="main2">
+			<div style="float:left;margin-left:100px">
+				<p>PALIt reitilläsi:</p>
+				<ul id="routes">
+				</ul>
+			</div>
+		</div>
+		<div class="row" id="map" style="display:none;">
+			<div style="width:60%;height:auto;float:left">
+				<img src="../site/img/palilinjat.jpg"/>
+			</div>
+			<div style="width:35%;height:auto;float:right;text-align:left;font-size:15px">
+				<ol>
+					<li>Keskusta länsipuoli</li>
+					<li>Keskusta itäpuoli - Tammela</li>
+					<li>Nekala - Koivistonkylä</li>
+					<li>Härmälä - Hatanpää - Keskusta</li>
+					<li>Kaukajärvi - Annala - Lukonmäki - Hervanta</li>
+					<li>Koilliskeskus - Takahuhti - Kissanmaa - Hakametsä - Janka - Koilliskeskus</li>
+					<li>Koilliskeskus - Leinola - Holvasti - Vehmainen</li>
+					<li>Lentävänniemi - Pohtola - Ryydynpohja - Lielahti - Pispan palvelukeskus</li>
+					<li>Tesoma - Rahola - Pispa - Keskusta</li>
+					<li>Hervanta</li>
+					<li>Multisilta - Peltolammi - Keskusta</li>
+					<li>Haukiluoma - Lamminpää - Tesoma - Lielahti</li>
+					<li>Keskusta länsipuoli - Pispala - Pispan palvelukeskus</li>
+					<li>Olkahinen - Kumpula - Tasanne - Atala - Koilliskeskus</li>
+					<li>Keskusta itäpuoli - Kaleva - Kissanmaa - Järvensivu</li>
+					<li>Hervanta - Hallila - Turtola - Kaleva</li>
+					<li>Kauppi - Sokos - Kaleva</li>
+					<li>Kaleva - Takahuhti - Irjala - Pappila - Koilliskeskus</li>
+					<li>Kauppi - Sokos - Kaleva</li>
+					<li>Teisko - Aitolahti</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+		
+	<script>
+		var session = new QiSession();
+		var audio = new Audio('../change_screen.ogg');
+		var palis = [ 
+					{"name":"PALI 1","stops":["keskusta"]},
+					{"name":"PALI 2","stops":["keskusta", "tammela"]},
+					{"name":"PALI 3","stops":["nekala", "koivistonkylä"]},
+					{"name":"PALI 4","stops":["härmälä", "hatanpää", "keskusta"]},
+					{"name":"PALI 5","stops":["kaukajärvi", "annala", "lukonmäki", "hervanta"]},
+					{"name":"PALI 6","stops":["koilliskeskus", "takahuhti", "kissanmaa", "hakametsä", "janka"]},
+					{"name":"PALI 7","stops":["koilliskeskus", "leinola", "holvasti", "vehmainen"]},
+					{"name":"PALI 8","stops":["lentävänniemi", "pohtola", "ryydynpohja", "lielahti", "pispala"]},
+					{"name":"PALI 9","stops":["tesoma", "rahola", "pispa", "keskusta"]},
+					{"name":"PALI 10","stops":["hervanta"]},
+					{"name":"PALI 11","stops":["multisilta", "peltolammi", "keskusta"]},
+					{"name":"PALI 12","stops":["haukiluoma", "lamminpää", "tesoma", "lielahti"]},
+					{"name":"PALI 13","stops":["keskusta", "pispala", "pispa"]},
+					{"name":"PALI 14","stops":["olkahinen", "kumpula", "tasanne", "atala", "koilliskeskus"]},
+					{"name":"PALI 15","stops":["keskusta", "kaleva", "kissanmaa", "järvensivu"]},
+					{"name":"PALI 16","stops":["hervanta", "hallila", "turtola", "kaleva"]},
+					{"name":"PALI 17","stops":["kauppi", "keskusta", "kaleva"]},
+					{"name":"PALI 18","stops":["kaleva", "takahuhti", "irjala", "pappila", "koilliskeskus"]},
+					{"name":"PALI 19","stops":["kauppi", "keskusta", "kaleva"]},
+					{"name":"PALI TEISKO","stops":["teisko", "aitolahti"]}
+					];
+						
+		function quit(){
+			//audio.play();
+			session.service('ALMemory').done(function(ALMemory) {
+				ALMemory.raiseEvent("Orientation/Exit", 0);
+			});
+		}
+		
+		function back(){
+			//audio.play();
+			document.getElementById("back_btn").style.display = 'none';
+			document.getElementById("main1").style.display = 'block';
+			document.getElementById("main2").style.display = 'block';
+			document.getElementById("map").style.display = 'none';
+		}
+		
+		function show_routes(){
+			document.getElementById("back_btn").style.display = 'block';
+			document.getElementById("main1").style.display = 'none';
+			document.getElementById("main2").style.display = 'none';
+			document.getElementById("map").style.display = 'block';
+			
+		}
+		
+		function search_routes(){
+			destination = document.getElementById("route_finder_input").value.toLowerCase();
+			routes_found = [];
+			while (document.getElementById("routes").firstChild) {
+				document.getElementById("routes").removeChild(document.getElementById("routes").firstChild);
+			}
+			for(i = 0; i < palis.length; ++i){
+				item = palis[i];
+				if(item["stops"].includes(destination)){
+					routes_found.push(item);
+					var new_item = document.createElement("li");
+					new_item.innerHTML = item["name"];
+					document.getElementById("routes").appendChild(new_item);
+				}
+			}
+			console.log(routes_found);
+		}
+	</script>
+	
+</body>
+</html>

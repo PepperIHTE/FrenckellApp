@@ -1,0 +1,362 @@
+<!doctype html>
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fi" lang="fi">
+	<head>
+			<meta charset="utf-8">
+			<title>Tapahtumainfo</title>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+			<meta content='width=1280, user-scalable=0' name='viewport' />
+			<script src="/libs/qimessaging/1.0/qimessaging.js"></script>
+		
+	<link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Ubuntu" rel="stylesheet"> 
+		
+		<link rel="apple-touch-icon" sizes="57x57" href="<?= SITEPATH ?>img/ico/apple-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="<?= SITEPATH ?>img/ico/apple-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="<?= SITEPATH ?>img/ico/apple-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="<?= SITEPATH ?>img/ico/apple-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="<?= SITEPATH ?>img/ico/apple-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="<?= SITEPATH ?>img/ico/apple-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="<?= SITEPATH ?>img/ico/apple-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="<?= SITEPATH ?>img/ico/apple-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="<?= SITEPATH ?>img/ico/apple-icon-180x180.png">
+		<link rel="icon" type="image/png" sizes="192x192"  href="<?= SITEPATH ?>img/ico/android-icon-192x192.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="<?= SITEPATH ?>img/ico/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="<?= SITEPATH ?>img/ico/favicon-96x96.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="<?= SITEPATH ?>img/ico/favicon-16x16.png">
+		<link rel="manifest" href="<?= SITEPATH ?>img/ico/manifest.json">
+
+
+		<link href="../site/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+		<link href="../site/css/style.css" rel="stylesheet" type="text/css">	
+		<script src="../site/js/bootstrap.min.js"></script>
+		<link href="../site/web-fonts-with-css/css/fontawesome-all.min.css" rel="stylesheet">
+		<style>
+		</style>
+	</head>
+	
+
+<body onload="ready()" class="bg-primary">
+	<header class="section1">
+		<div class="container-fluid">
+			<div class="row">
+				<div id="title_select" style="display:block">
+					<h2 id="page_title" class="col-xs-9">Upcoming Events - Tampere</h2>
+				</div>
+				<nav class="col-xs-3">
+					<a onclick="quit()" class="float-right"><i class="text-shadow fas fa-times-circle fa-3x"></i></a>	
+					<a id="back_btn" onclick="back()" style="display:none" class="float-right"><i class="text-shadow fas fa-arrow-alt-circle-left fa-3x"></i></a>
+				</nav>	
+			</div>
+		</div>
+		
+	</header>	
+	<div class="row" id="filter" style="display:none">	
+		<a>Show events:</a>
+		<span id="filter_btns">
+			<input type="button" id="default_selected" class="selected_btn" onclick="filter_events(7, this)" value="1 w"></input>
+			<input type="button" class="unselected_btn " onclick="filter_events(14, this)" value="2 w"></input>
+			<input type="button" class="unselected_btn" onclick="filter_events(31, this)" value="1 m"></input>
+			<input type="button" class="unselected_btn" onclick="filter_events(62, this)" value="2 m"></input>
+			<input type="button" class="unselected_btn" onclick="filter_events(186, this)" value="6 m"></input>
+		</span>
+		
+	</div>
+	<div id="separator" class="row" style="height:30px;display:none"></div>
+	<div class="container">
+		<div id="scroll_left" style="visibility:hidden"><i style="float:left" class="fas fa-caret-left"></i></div>
+		<div id="scroll_right" style="visibility:hidden"><i style="float:right" class="fas fa-caret-right"></i></div>
+		<div class="row">
+			
+			<div id="loader"><img src="../site/img/loading.gif"/></div>
+			<div id="event_container" class="row" style="width:100%;overflow-x:auto;white-space:nowrap;height:auto;"></div>
+			
+			<div id="event_info" style="display:none;">
+				<div class="row">
+					<h2 id="event_name"></h2>
+				</div>
+				
+				<span style="width:60%;float:left">
+					<p id="event_description" style="text-align:left"></p>
+				</span>
+				<span style="width:30%;float:right;text-align:left">
+					<img id="event_picture" style="width:auto;height:auto;"></img>
+					<br><br>
+					<p id="event_start_date"></p>
+					<p id="event_end_datetime"></p>
+					<br>
+					<p id="event_address"></p>
+				</span>
+			</div>
+			<div class="row" id="scroll_bar" style="display:none">|  o  o  o  o</id>
+		</div>
+	</div>
+	
+	<script>
+		var session = new QiSession();
+		var audio = new Audio('../change_screen.ogg');
+
+		ec = document.getElementById("event_container");
+		current_scroll = ec.scrollLeft;
+		var events_in_tf = [];
+		
+		ec.onscroll = function() {
+			current_scroll = ec.scrollLeft;
+			var maxScrollLeft = ec.scrollWidth - ec.clientWidth;
+			if(ec.scrollLeft == 0){
+				document.getElementById("scroll_left").style.visibility = 'hidden';
+			}
+			else{
+				document.getElementById("scroll_left").style.visibility = 'visible';
+			}
+			if(ec.scrollLeft == maxScrollLeft){
+				document.getElementById("scroll_right").style.visibility = 'hidden';
+			}
+			else{
+				document.getElementById("scroll_right").style.visibility = 'visible';
+			}
+			if(current_scroll < 200){
+				document.getElementById("scroll_bar").innerHTML = "|  o  o  o  o";
+			}
+			if((current_scroll >= 200) && (current_scroll < (maxScrollLeft / 6)*2)){
+				document.getElementById("scroll_bar").innerHTML = "o  |  o  o  o";
+			}
+			if((current_scroll >= (maxScrollLeft / 6) * 2) && (current_scroll < (maxScrollLeft / 6)*4)){
+				document.getElementById("scroll_bar").innerHTML = "o  o  |  o  o";
+			}
+			if((current_scroll >= (maxScrollLeft / 6) * 4) && (current_scroll < maxScrollLeft - 200)){
+				document.getElementById("scroll_bar").innerHTML = "o  o  o  |  o";
+			}
+			if(current_scroll >= maxScrollLeft - 200){
+				document.getElementById("scroll_bar").innerHTML = "o  o  o  o  |";
+			}
+		}
+		
+		function ready() {	
+			var curr_page = 0;
+			events = JSON.parse(httpGet("https://visittampere.fi/api/v1/event" + "&limit=200&lang=en"));
+
+			document.getElementById("loader").style.display = "none";
+			document.getElementById("title_select").style.display = "block";
+			document.getElementById("filter").style.display = "block";
+			document.getElementById("scroll_right").style.visibility = "visible";
+			document.getElementById("scroll_bar").style.display = "block";
+			document.getElementById("filter").style.display = "block";
+			var filtering = 7;
+			filter_events(filtering, document.getElementsByClassName("selected_btn")[0]);
+			random_suggestion();
+		}
+		
+		function httpGet(theUrl)
+		{
+			var xmlHttp = new XMLHttpRequest();
+			xmlHttp.open( "GET", theUrl, false );
+			xmlHttp.send( null );
+			return xmlHttp.responseText;
+		}		
+		
+		function display_events(future){
+			odds = [];
+			evens = [];
+			container = document.getElementById("event_container");
+			for(i = 0; i < events_in_tf.length; ++i){
+				if(i%2==0){
+					evens.push(events_in_tf[i]);
+				}
+				else{
+					odds.push(events_in_tf[i]);
+				}
+			}
+			for(i = 0; i < evens.length; ++i){	
+				var div = document.createElement("button");
+				div.class = "class=col-sm-12 flex-parent buttonarea wrap";
+				div.style.height = "230px";
+				div.style.width = "300px";
+				div.style.verticalAlign = "top";
+				div.style.padding = "15px";
+				div.style.whiteSpace = "normal";
+				div.style.diplay = "inline-block";
+				div.id = evens[i]["id"];
+				div.onclick = function(){
+					event_clicked(this);
+				}
+				start = evens[i]["start_datetime"]/1000;
+				end = evens[i]["end_datetime"]/1000;
+				if(end > start){
+					div.innerHTML = "<p style=\"font-size:25px\">" + evens[i]["title"] + "</p><p style=\"font-size:20px\">" + timeConverter(start) + " -<br>" + timeConverter(end) + "</p>";
+				}
+				else{
+					div.innerHTML = "<p style=\"font-size:25px\">" + evens[i]["title"] + "</p><p style=\"font-size:20px\">" + timeConverter(start) + "</p>";
+				}
+				container.appendChild(div);
+			}
+			container.appendChild(document.createElement('br'));
+			for(i = 0; i < odds.length; ++i){
+				var div = document.createElement("button");
+				div.class = "class=col-sm-12 flex-parent buttonarea wrap";
+				div.style.height = "230px";
+				div.style.width = "300px";
+				div.style.verticalAlign = "top";
+				div.style.padding = "10px";
+				div.style.whiteSpace = "normal";
+				div.style.diplay = "inline-block";
+				div.id = odds[i]["id"];
+				div.onclick = function(){
+					event_clicked(this);
+				}
+				start = odds[i]["start_datetime"]/1000;
+				end = odds[i]["end_datetime"]/1000;
+				if(end > start){
+					div.innerHTML = "<p style=\"font-size:25px\">" + odds[i]["title"] + "</p><p style=\"font-size:20px\">" + timeConverter(start) + " -<br>" + timeConverter(end) + "</p>";
+				}
+				else{
+					div.innerHTML = "<p style=\"font-size:25px\">" + odds[i]["title"] + "</p><p style=\"font-size:20px\">" + timeConverter(start) + "</p>";
+				}
+				container.appendChild(div);
+			}
+		}
+		
+		function filter_events(future, e){
+			filtering = future;
+			var div = document.getElementById('event_container');
+			while(div.firstChild){
+				div.removeChild(div.firstChild);
+			}
+			var unselect = document.getElementById("filter_btns").children;
+			for(i = 0; i < unselect.length; ++i){
+				var child = unselect[i];
+				child.className = "unselected_btn";
+			}
+			e.className = "selected_btn";
+			date = new Date().getTime();
+			target_date = date + (future * 24 * 60 * 60 * 1000);
+			events_in_tf = [];
+			for(i = 0; i < events.length; i++){
+				if(events[i]["end_datetime"] < date){
+					//Event has already ended
+					continue;
+				}
+				else if(target_date < events[i]["start_datetime"]){
+					//Event start out of range
+					continue;
+				}
+				events_in_tf.push(events[i]);
+			}
+			events_in_tf.sort(function(a,b){return a["start_datetime"] - b["start_datetime"];});
+			
+			display_events(future);
+			document.getElementById("event_container").scrollLeft = current_scroll - 1;
+		}
+		
+		function event_clicked(element){
+			audio.play();
+			session.service('ALMemory').done(function(ALMemory) {
+				ALMemory.raiseEvent("orientation/silence", 1);
+			});
+			var data;
+			var loop = 0;
+			var xhttp = new XMLHttpRequest();
+						
+			selected_event = JSON.parse(httpGet("https://visittampere.fi/api/v1/event/" + element.id + "&lang=en"));
+			display_event(selected_event);	
+		}
+		
+		function display_event(e){
+			say(e["title"]);
+			try {
+				document.getElementById("event_picture").src = e["image"]["src"];
+			}
+			catch(err){
+				console.log("No image for this event");
+			}
+			document.getElementById("back_btn").style.display = "block";
+			document.getElementById("event_container").style.display = 'none';
+			document.getElementById("event_info").style.display = 'block';
+			document.getElementById("scroll_left").style.display = 'none';
+			document.getElementById("scroll_right").style.display = 'none';
+			document.getElementById("filter").style.display = "none";
+			document.getElementById("scroll_bar").style.display = "none";
+			document.getElementById("page_title").innerHTML = e["title"];
+			document.getElementById("event_description").innerHTML = e["description"];
+			document.getElementById("event_start_date").innerHTML = "<i class=\"fa fa-calendar\"> " + timeConverter(e["start_datetime"]/1000) + " -<br>" + timeConverter(e["end_datetime"]/1000); 
+			document.getElementById("event_address").innerHTML = "<i class=\"fa fa-map-marker\"></i> " + e["contact_info"]["address"];
+			vt = Math.floor(Math.random() * 5);
+			if(vt == 1){
+				say("You can find more information on the events from Visit Tampere screen");
+			}
+		}
+		
+		function timeConverter(UNIX_timestamp){
+			if(isNaN(UNIX_timestamp)){
+				return " ";
+			}
+			var a = new Date(UNIX_timestamp * 1000);
+			var year = a.getFullYear();
+			var month = a.getMonth() + 1;
+			var date = a.getDate();
+			var hour = a.getHours();
+			var min = a.getMinutes();
+			var sec = a.getSeconds();
+			if(hour < 10){
+				hour = hour.toString();
+				hour = "0" + hour;
+				if(hour == "03"){
+					return date + '.' + month + '.' + year
+				}
+			}
+			if(min < 10){
+				min = min.toString();
+				min = "0" + min;
+			}
+			var time = date + '.' + month + '.' + year + ' ' + hour + ':' + min ;
+			return time;
+		}
+
+		function quit(){
+			audio.play();
+			session.service('ALMemory').done(function(ALMemory) {
+				ALMemory.raiseEvent("orientation/silence", 1);
+			});
+			session.service('ALMemory').done(function(ALMemory) {
+				ALMemory.raiseEvent("Orientation/Exit", 1);
+			});
+			
+		}
+	
+		function back(){
+			audio.play();
+			session.service('ALMemory').done(function(ALMemory) {
+				ALMemory.raiseEvent("orientation/silence", 1);
+			});
+			document.getElementById("scroll_left").style.display = 'block';
+			document.getElementById("scroll_right").style.display = 'block';
+			document.getElementById("page_title").innerHTML = "Upcoming Events - Tampere";
+			document.getElementById("event_picture").src = "";
+			document.getElementById("filter").style.display = 'block';
+			document.getElementById("back_btn").style.display = 'none';
+			document.getElementById("event_container").style.display = 'block';
+			document.getElementById("event_info").style.display = 'none';
+			document.getElementById("title_select").style.display = 'block';
+			document.getElementById("scroll_bar").style.display = "block";	
+		}
+		
+		function random_suggestion(){
+			r_event = Math.floor(Math.random() * events_in_tf.length)
+			document.getElementById(events_in_tf[r_event].id).style.border = '7px solid #FF99CC';
+			say("I can recommend " + events_in_tf[r_event]["title"]);
+		}
+		
+		function wait(ms){
+			var start = new Date().getTime();
+			var end = start;
+			while(end < start + ms) {
+				end = new Date().getTime();
+			}
+		}
+		function say(str){
+			session.service('ALMemory').done(function(ALMemory) {
+				ALMemory.raiseEvent("orientation/say_event", str);
+			});
+		}
+	</script>
+	
+</body>
+</html>

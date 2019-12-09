@@ -1,0 +1,45 @@
+topic: ~pali()
+language: fif
+
+concept:(more_info)["Pali palveluliikenne on arjen pelastaja, jossa aina autetaan ekä ole kiirettä. Eikö kuulostakin hienolta" "Jos bussilla liikkuminen on hankalaa, Pali on oiva vaihtoehto. Se on tavallisen bussilipun hintainen kyyti, johon ei tarvitse hakemuksia tai erillisiä todistuksia. Kuljetuksen voi yleensä saada ovelta ovelle suoraan kotoa. Palissa on matala kynnys ja sinne on helppo nousta. Minäkin saattaisin pystyä rullailemaan sinne!" "Eräs rouva kertoi minulle, että kulkee Palilla säännöllisesti ja on saanut sieltä myös ystävän. Avustajakin auttaa välillä painavien kassien kanssa. Minusta se kuulostaa oikein mukavalta ja turvalliselta! Vai mitä olet mieltä"]
+
+concept:(places)[Aitolahti Amuri Annala Armonkallio Atala Epilä Finlayson Haihara Hakametsä Hallila Hatanpää "Hatanpään sairaala" Haukiluoma Hervanta Holvasti Huikas Hyhky Härmälä Ikuri Irjala Janka Järvensivu Kaakinmaa Kaarila Kaleva "Kalevan prisma" Kalkku Kaukajärvi "Kaupin sairaala" Kauppi Keskusta Kissanmaa Koilliskeskus Koivistonkylä "Koivistonkylän prisma" Korkinmäki Kumpula Kyttälä Käpylä Lakalaiva Lamminpää Lapinniemi Lappi Leinola Lentävänniemi Lielahti Linnainmaa Lukonmäki Multisilta Muotiala Nekala Nirva Olkahinen Palokallio Pappila "Partolan liikekeskus" Peltolammi Petsamo Pispa Pispala "Pohjolan palvelukeskus" Pohtola Pyynikki Rahola Rantaperkiö Ratina Rauhaniemi Rautaharkko Ristinmäki Ruotula Ryydynpohja Santalahti Sokos Taatala Takahuhti Tammela Tampella Tasanne TAYS Teisko Tesoma "Tipotien terveysasema" Tohloppi Turtola Uusikylä Vehmainen Veisu Viinikka Villilä Viola Vuohenoja]
+
+concept:(howtopali)Yksi. Tilaa matka hyvissä ajoin. \pau=500\ Kaksi. Ole ajoissa valmiina, sillä auto voi olla etuajassa. \pau=500\ Kolme. Kuljettaja tai avustaja auttaa kyytiin nousemisessa. \pau=500\ Neljä. Istu rauhassa ja nauti kanssamatkustajien seurasta Palin rennossa ilmapiirissä.
+
+u:(e:onStart) ^gotoReactivate(start)
+
+proposal: %start $html="fin/pali_index.html"
+    u1:(e:orientation/pali_route) $html="fin/pali_reitit.html" ^gotoReactivate(routes)
+    u1:(e:orientation/pali_faq) ^gotoReactivate(ukk)
+    u1:(e:orientation/pali_more) ^gotoReactivate(more)
+    u1:([reitti "hae reitti"]) reittihaku $html="fin/pali_reitit.html" \pau=1000\ Voit sanoa paikan nimen, tai valita listasta ^gotoReactivate(routes)
+    u1:(["kerro lisää" lisää]) lisätietoa ^gotoReactivate(more)
+    u1:(["usein kysytyt" kysytyt]) usein kysyttyä ^gotoReactivate(ukk)    
+    
+proposal: %routes 
+    u1:(_~places) $place=$1 ^gotoReactivate(routes)
+    u1:(e:orientation/pali_back) ^gotoReactivate(start)
+    u1:([takaisin]) ^gotoReactivate(start)
+    u1:(e:orientation/route_clicked) ^gotoReactivate(route_click)
+    
+proposal: %route_click
+    u1:(e:orientation/pali_map_back) ^gotoReactivate(routes)
+    
+    
+proposal: %ukk $html="fin/pali_ukk.html"
+    u1:(e:orientation/pali_back) ^gotoReactivate(start)
+    u1:([takaisin]) ^gotoReactivate(routes)
+    
+proposal: %more $html="fin/pali_more.html" ^rand[~more_info] \pau=1000\ Tahtoisitko kuulla, kuinka palia käytetään?
+    u1:(e:orientation/pali_back) ^gotoReactivate(start)
+    u1:([ei "ei kiitos" en]) Selvä
+        u2:(e:orientation/pali_back) ^gotoReactivate(start)
+    u1:([takaisin]) ^gotoReactivate(routes)
+    u1:([kyllä joo kerro tahdon tahtoisin]) ~howtopali
+        u2:([takaisin]) ^gotoReactivate(routes)
+        u2:(e:orientation/pali_back) ^gotoReactivate(start)
+        u2:([kiitos kiitti selvä])Ilo on minun puolellani
+            u3:(e:orientation/pali_back) ^gotoReactivate(start)
+            u3:([takaisin]) ^gotoReactivate(routes)
+           

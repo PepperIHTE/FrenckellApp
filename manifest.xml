@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<package version="0.0.0" uuid="tamperequiz_test-b27a96">
+ <names>
+  <name lang="en_US">Frenckell App</name>
+ </names>
+ <supportedLanguages>
+  <language>en_US</language>
+  <language>fi_FI</language>
+ </supportedLanguages>
+ <descriptionLanguages>
+  <language>en_US</language>
+  <language>fi_FI</language>
+ </descriptionLanguages>
+ <contents>
+  <behaviorContent path="behavior_1">
+   <userRequestable/>
+   <nature>interactive</nature>
+   <names>
+    <name lang="en_US">Frenckell</name>
+    <name lang="fi_FI">Frenckell</name>
+   </names>
+   <permissions/>
+  </behaviorContent>
+  <behaviorContent path="quiz_">
+   <nature>interactive</nature>
+   <permissions/>
+  </behaviorContent>
+  <behaviorContent path="guide_">
+   <nature>interactive</nature>
+   <permissions/>
+  </behaviorContent>
+  <behaviorContent path="happenings_">
+   <nature>interactive</nature>
+   <permissions/>
+  </behaviorContent>
+  <behaviorContent path="pali_">
+   <nature>interactive</nature>
+   <permissions/>
+  </behaviorContent>
+  <dialogContent typeVersion="1.0" topicName="ExampleDialog">
+   <topic language="en_US" path="behavior_1/ExampleDialog/ExampleDialog_enu.top"/>
+   <topic language="fi_FI" path="behavior_1/ExampleDialog/ExampleDialog_fif.top"/>
+  </dialogContent>
+  <dialogContent typeVersion="1.0" topicName="quiz">
+   <topic language="en_US" path="quiz/quiz_enu.top"/>
+   <topic language="fi_FI" path="quiz/quiz_fif.top"/>
+  </dialogContent>
+  <dialogContent typeVersion="1.0" topicName="guide">
+   <topic language="en_US" path="guide/guide_enu.top"/>
+   <topic language="fi_FI" path="guide/guide_fif.top"/>
+  </dialogContent>
+  <dialogContent typeVersion="1.0" topicName="pali">
+   <topic language="en_US" path="pali/pali_enu.top"/>
+   <topic language="fi_FI" path="pali/pali_fif.top"/>
+  </dialogContent>
+ </contents>
+</package>

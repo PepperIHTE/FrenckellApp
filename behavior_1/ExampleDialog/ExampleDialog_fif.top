@@ -1,0 +1,63 @@
+topic: ~ExampleDialog()
+language: fif
+
+concept:(greeting) ^rand["Haluaisitko kokeilla tietovisaa" "Voisinko auttaa teitä löytämään oikean palvelupisteen" "Hei, miten menee?" "Voisinko olla avuksi?" "Hyvää päivää!"]
+concept:(idle_action) ^rand[$idle1=1 $idle2=1]
+concept:(agree)[selvä "o k" okei]
+concept:(affirmation) [kyllä joo tahdon haluan toki juu]
+concept:(denial) [ei en]
+concept:(fine)[hyvin hyvää "o k" "ihan hyvin"]
+concept:(bad)[huono huonosti "ei hyvin"]
+
+u:(e:onStart) $html="fin/start-fin.html"
+
+u:(tietovisa) ^rand[~agree], käynnistetään tietovisaa $orientation/startapp=0 
+u:([frenckell "frenckell info"]) ^rand[~agree], käynnistän opastuksen $orientation/startapp=1 
+u:([tapahtuma tapahtumat "tapahtuma info"]) ^rand[~agree] $orientation/startapp=2 
+u:([pali "palveluliikenne"]) ^rand[~agree] $orientation/startapp=3 
+ 
+u:(e:Dialog/NoOneSpeak20) ^gotoReactivate(zone1)   
+
+proposal: %zone2 
+    u1:(e:EngagementZones/PersonEnteredZone2) ^gotoReactivate(zone1) $track=1
+    u1:(e:Dialog/NoOneSpeak20) ~idle_action
+    
+    
+proposal: %zone1
+    u1:(e:EngagementZones/PersonEnteredZone1) ^gotoRandom(greeting)
+    
+    
+proposal: %greeting Haluaisitko kokeilla tietovisaa
+    u1:(~affirmation) Mahtavaa! $orientation/startapp=0
+    u1:(~denial) Voisinko auttaa jotenkin muuten?
+    u1:(e:Dialog/NoOneSpeak10) \pau=500\
+    
+proposal: %greeting Voin auttaa löytämään oikean palvelupisteen
+    u1:(~affirmation) Mahtavaa! $orientation/startapp=1
+    u1:(~denial) Voisinko auttaa jotenkin muuten?
+    u1:(e:Dialog/NoOneSpeak10) \pau=500\
+    
+proposal: %greeting Tampereella on paljon tapahtumia, kiinnostaisiko kuulla niistä?
+    u1:(~affirmation) Mahtavaa! $orientation/startapp=2
+    u1:(~denial) Voisinko auttaa jotenkin muuten?
+    u1:(e:Dialog/NoOneSpeak10) \pau=500\
+    
+proposal: %greeting Minun kanssani voi tietovisailla, tutustua paikallisiin tapahtumiin tai kysyä Frenckellin palveluista
+    
+proposal: %greeting Voin kertoa, mitä tällä viikolla tapahtuu Tampereella
+    u1:(~affirmation) Mahtavaa $orientation/startapp=2
+    u1:(~denial) Voisinko auttaa jotenkin muuten?
+    u1:(e:Dialog/NoOneSpeak10) \pau=500\
+    
+proposal: %greeting Moi. Miten menee?
+    u1:(~fine) Sepä mukava kuulla
+    u1:(~bad) Sepä harmillista. Voisinko koittaa viihdyttää Teitä vaikkapa tietovisalla?
+        u2:(~affirmation) $orientation/startapp=1
+    u1:(e:Dialog/NoOneSpeak10) \pau=500\
+    
+proposal: %greeting Tahtoisitko kuulla PALI palveluliikenteestä?
+    u1:(~affirmation) Minäpä kerron $orientation/startapp=3
+    u1:(~denial) Voisinko auttaa jotenkin muuten?
+    u1:(e:Dialog/NoOneSpeak10) \pau=500\
+
+proposal: %greeting PALI Palveluliikenne on arjen pelastaja!

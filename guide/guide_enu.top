@@ -1,0 +1,72 @@
+topic: ~guide()
+language: enu
+
+u:(e:onStart) ^gotoReactivate(services) Here is a list of the services present in the Frenckell. Select a service you want me to tell more about 
+
+u:(e:orientation/joukkoliikenne) ^gotoReactivate(joukkoliikenne) 
+u:(e:orientation/joukkoliikenne-info) ^gotoReactivate(joukkoliikenne-info) 
+u:(e:orientation/joukkoliikenne-map) ^gotoReactivate(joukkoliikenne-map) 
+
+u:(e:orientation/kaupunkiymparisto) ^gotoReactivate(kaupunkiymparisto) 
+u:(e:orientation/kaupunkiymparisto-info) ^gotoReactivate(kaupunkiymparisto-info)
+u:(e:orientation/kaupunkiymparisto-map) ^gotoReactivate(kaupunkiymparisto-map)
+
+u:(e:orientation/pysakoinninvalvonta) ^gotoReactivate(pysakoinninvalvonta)
+u:(e:orientation/pysakoinninvalvonta-info) ^gotoReactivate(pysakoinninvalvonta-info)
+u:(e:orientation/pysakoinninvalvonta-map) ^gotoReactivate(pysakoinninvalvonta-map)
+
+u:(e:orientation/kotitori) ^gotoReactivate(kotitori)
+u:(e:orientation/kotitori-info) ^gotoReactivate(kotitori-info)
+u:(e:orientation/kotitori-map) ^gotoReactivate(kotitori-map)
+
+u:(e:orientation/kassapalvelu) ^gotoReactivate(kassapalvelu)
+u:(e:orientation/kassapalvelu-info) ^gotoReactivate(kassapalvelu-info)
+u:(e:orientation/kassapalvelu-map) ^gotoReactivate(kassapalvelu-map)
+
+u:(e:orientation/visit) ^gotoReactivate(visit)
+u:(e:orientation/visit-info) ^gotoReactivate(visit-info)
+u:(e:orientation/visit-map) ^gotoReactivate(visit-map)
+
+u:(e:orientation/kasvatus) ^gotoReactivate(kasvatus)
+u:(e:orientation/kasvatus-info) ^gotoReactivate(kasvatus-info)
+u:(e:orientation/kasvatus-map) ^gotoReactivate(kasvatus-map)
+
+u:(e:orientation/services) ^gotoReactivate(services)
+
+##MAIN MENU
+proposal: %services $html="en/services.html"
+
+##JOUKKOLIIKENNE
+proposal: %joukkoliikenne $html="en/services-joukkoliikenne.html"
+proposal: %joukkoliikenne-info $html="en/services-joukkoliikenne-info.html" Here you can buy travel tickets and cards, ask about timetables and routes, resolve issues or give feedback
+proposal: %joukkoliikenne-map $html="en/services-joukkoliikenne-map.html" There is a queue machine near the exit. Take a queue ticket and wait for your turn. You can take a quiz while waiting!
+
+##KAUPUNKIYMPÄRISTÖ
+proposal: %kaupunkiymparisto $html="en/services-kaupunkiymparisto.html"
+proposal: %kaupunkiymparisto-info $html="en/services-kaupunkiymparisto-info.html" Urban environment and infrastructure customer service often displays information on local detailed planning objects, which are on public notice for opinions.
+proposal: %kaupunkiymparisto-map $html="en/services-kaupunkiymparisto-map.html" Urban environment and infrastructure service desk is located on my right in the back of this space.
+
+##PYSÄKÖINNINVALVONTA
+proposal: %pysakoinninvalvonta $html="en/services-pysakointivalvonta.html" 
+proposal: %pysakoinninvalvonta-info $html="en/services-pysakointivalvonta-info.html" City Parking Control service desk provides counseling and you can submit a written appeal to a parking fine. There you can also purchase residence and company parking permits.
+proposal: %pysakoinninvalvonta-map $html="en/services-pysakointivalvonta-map.html" The City Parking Control service desk is located behind me at the third desk. Parking tickets can be paid at the desk next to it.
+
+##KOTITORI
+proposal: %kotitori $html="en/services-kotitori-laitetori.html"
+proposal: %kotitori-info $html="en/services-kotitori-laitetori-info.html" From Kotitori, you can find suitable services for yourself or a family member. You can ask them anything!
+proposal: %kotitori-map $html="en/services-kotitori-laitetori-map.html" Kotitori is located in the far back of this space.
+
+##KASSAPALVELU
+proposal: %kassapalvelu $html="en/services-kassapalvelut.html"
+proposal: %kassapalvelu-info $html="en/services-kassapalvelut-info.html" City's cashier customer service handles City of Tampere bill issues.
+proposal: %kassapalvelu-map $html="en/services-kassapalvelut-map.html" Cashier customer service is located on my right, next to the info desk.
+
+##VISIT TAMPERE
+proposal: %visit $html="en/services-visit.html"
+proposal: %visit-info $html="en/services-visit-info.html" Visit Tampere offers information and tips for tourists. The main source of information is their website but they can also be contacted with phone and email.
+proposal: %visit-map $html="en/services-visit-map.html" You can take a look at the Visit Tampere website on the big touch screen behind me.
+
+##KASVATUS- JA OPETUSPALVELUT
+proposal: %kasvatus $html="en/services-kasvatus.html" 
+proposal: %kasvatus-info $html="en/services-kasvatus-info.html" You can ask for guidance in  different situations with applications and enrollment.
+proposal: %kasvatus-map $html="en/services-kasvatus-map.html" You can find The Day Care and Education service desk behind me.

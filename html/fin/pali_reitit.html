@@ -1,0 +1,312 @@
+<!doctype html>
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fi" lang="fi">
+	<head>
+			<meta charset="utf-8">
+			<title>TTY-Robot</title>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+			<meta name="viewport" content="width=1280, user-scalable=0">
+			<script src="/libs/qimessaging/1.0/qimessaging.js"></script>
+					
+			<link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Ubuntu" rel="stylesheet"> 
+		
+		<link rel="apple-touch-icon" sizes="57x57" href="<?= SITEPATH ?>img/ico/apple-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="<?= SITEPATH ?>img/ico/apple-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="<?= SITEPATH ?>img/ico/apple-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="<?= SITEPATH ?>img/ico/apple-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="<?= SITEPATH ?>img/ico/apple-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="<?= SITEPATH ?>img/ico/apple-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="<?= SITEPATH ?>img/ico/apple-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="<?= SITEPATH ?>img/ico/apple-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="<?= SITEPATH ?>img/ico/apple-icon-180x180.png">
+		<link rel="icon" type="image/png" sizes="192x192"  href="<?= SITEPATH ?>img/ico/android-icon-192x192.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="<?= SITEPATH ?>img/ico/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="<?= SITEPATH ?>img/ico/favicon-96x96.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="<?= SITEPATH ?>img/ico/favicon-16x16.png">
+		<link rel="manifest" href="<?= SITEPATH ?>img/ico/manifest.json">
+
+
+		<link href="../site/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+		<link href="../site/css/pali_style.css" rel="stylesheet" type="text/css">	
+		<script src="../site/js/bootstrap.min.js"></script>
+		<link href="../site/web-fonts-with-css/css/fontawesome-all.min.css" rel="stylesheet">
+	</head>
+	
+
+<body class="bg-primary">
+	<header class="section1">
+		<div class="container-fluid">
+			<div class="row">
+				<div id="title_select" style="display:block">
+					<h2 id="page_title" class="col-xs-9">PALI - Palveluliikenne</h2>
+				</div>
+				<nav class="col-xs-3">
+					<a onclick="quit()" class="float-right"><i class="text-shadow fas fa-times-circle fa-3x"></i></a>	
+					<a id="back_btn" onclick="back()" class="float-right"><i class="text-shadow fas fa-arrow-alt-circle-left fa-3x"></i></a>
+				</nav>
+			</div>
+		</div>	
+	</header>	
+	<div id="main1" class="container">
+		<div class="row section-main navi pali">
+		<div class="col-xs-8">
+			<h2 class="text-left">Hae oman alueen PALI-linjoja:</h2>
+			<div class="form-inline text-left">
+  				<div class="row">
+    				<label class="sr-only" for="palilinjat">Sano tai valitse kaupunginosa:</label>
+    				<select class="form-control" id="palilinjat" style="height:100px;">
+						<option value="">Valitse paikka</option>
+						<option value="Aitolahti">Aitolahti</option>
+						<option value="Amuri">Amuri</option>
+						<option value="Annala">Annala</option>
+						<option value="Armonkallio">Armonkallio</option>
+						<option value="Atala">Atala</option>
+						<option value="Epilä">Epilä</option>
+						<option value="Finlayson">Finlayson</option>
+						<option value="Haihara">Haihara</option>
+						<option value="Hakametsä">Hakametsä</option>
+						<option value="Hallila">Hallila</option>
+						<option value="Hatanpää">Hatanpää</option>
+						<option value="Hatanpään sairaala">Hatanpään sairaala</option>
+						<option value="Haukiluoma">Haukiluoma</option>
+						<option value="Hervanta">Hervanta</option>
+						<option value="Holvasti">Holvasti</option>
+						<option value="Huikas">Huikas</option>
+						<option value="Hyhky">Hyhky</option>
+						<option value="Härmälä">Härmälä</option>
+						<option value="Ikuri">Ikuri</option>
+						<option value="Irjala">Irjala</option>
+						<option value="Janka">Janka</option>
+						<option value="Järvensivu">Järvensivu</option>
+						<option value="Kaakinmaa">Kaakinmaa</option>
+						<option value="Kaarila">Kaarila</option>
+						<option value="Kaleva">Kaleva</option>
+						<option value="Kalevan prisma">Kalevan prisma</option>
+						<option value="Kalkku">Kalkku</option>
+						<option value="Kaukajärvi">Kaukajärvi</option>
+						<option value="Kaupin sairaala">Kaupin sairaala</option>
+						<option value="Kauppi">Kauppi</option>
+						<option value="Keskusta">Keskusta</option>
+						<option value="Kissanmaa">Kissanmaa</option>
+						<option value="Koilliskeskus">Koilliskeskus</option>
+						<option value="Koivistonkylä">Koivistonkylä</option>
+						<option value="Koivistonkylän prisma">Koivistonkylän prisma</option>
+						<option value="Korkinmäki">Korkinmäki</option>
+						<option value="Kumpula">Kumpula</option>
+						<option value="Kyttälä">Kyttälä</option>
+						<option value="Käpylä">Käpylä</option>
+						<option value="Lakalaiva">Lakalaiva</option>
+						<option value="Lamminpää">Lamminpää</option>
+						<option value="Lapinniemi">Lapinniemi</option>
+						<option value="Lappi">Lappi</option>
+						<option value="Leinola">Leinola</option>
+						<option value="Lentävänniemi">Lentävänniemi</option>
+						<option value="Lielahti">Lielahti</option>
+						<option value="Linnainmaa">Linnainmaa</option>
+						<option value="Lukonmäki">Lukonmäki</option>
+						<option value="Multisilta">Multisilta</option>
+						<option value="Muotiala">Muotiala</option>
+						<option value="Nekala">Nekala</option>
+						<option value="Nirva">Nirva</option>
+						<option value="Olkahinen">Olkahinen</option>
+						<option value="Palokallio">Palokallio</option>
+						<option value="Pappila">Pappila</option>
+						<option value="Partolan liikekeskus">Partolan liikekeskus</option>
+						<option value="Peltolammi">Peltolammi</option>
+						<option value="Petsamo">Petsamo</option>
+						<option value="Pispa">Pispa</option>
+						<option value="Pispala">Pispala</option>
+						<option value="Pohjolan palvelukeskus">Pohjolan palvelukeskus</option>
+						<option value="Pohtola">Pohtola</option>
+						<option value="Pyynikki">Pyynikki</option>
+						<option value="Rahola">Rahola</option>
+						<option value="Rantaperkiö">Rantaperkiö</option>
+						<option value="Ratina">Ratina</option>
+						<option value="Rauhaniemi">Rauhaniemi</option>
+						<option value="Rautaharkko">Rautaharkko</option>
+						<option value="Ristinmäki">Ristinmäki</option>
+						<option value="Ruotula">Ruotula</option>
+						<option value="Ryydynpohja">Ryydynpohja</option>
+						<option value="Santalahti">Santalahti</option>
+						<option value="Sokos">Sokos</option>
+						<option value="Taatala">Taatala</option>
+						<option value="Takahuhti">Takahuhti</option>
+						<option value="Tammela">Tammela</option>
+						<option value="Tampella">Tampella</option>
+						<option value="Tasanne">Tasanne</option>
+						<option value="TAYS">TAYS</option>
+						<option value="Teisko">Teisko</option>
+						<option value="Tesoma">Tesoma</option>
+						<option value="Tipotien terveysasema">Tipotien terveysasema</option>
+						<option value="Tohloppi">Tohloppi</option>
+						<option value="Turtola">Turtola</option>
+						<option value="Uusikylä">Uusikylä</option>
+						<option value="Vehmainen">Vehmainen</option>
+						<option value="Veisu">Veisu</option>
+						<option value="Viinikka">Viinikka</option>
+						<option value="Villilä">Villilä</option>
+						<option value="Viola">Viola</option>
+						<option value="Vuohenoja">Vuohenoja</option>
+					</select>
+					<button id="hae" onclick="search_routes()" class="btn btn-primary text-center box-shadow-thin" style="width:150px;height:70px;font-size:35px;">Hae</button>
+  				</div>
+  				
+			</div>
+			
+		
+		</div>
+			<div class="col-xs-3 pali">
+				<a id="Kaikki" onclick="show_routes(this)" class="link-round bg-lavender whiteoutline box-shadow text-center">
+					<h3>Näytä<br>kaikki reitit</h3>
+				</a>
+			</div>
+			</div>
+		<div class="row">
+			<div class="col-xs-12 pali">
+				<p class="text-left">Voit avata karttanäkymän klikkaamalla reittiä</p>
+				<h2 class="text-left">PALIT reitilläsi:</h2>
+			</div>		
+			<div id="routes" class="col-xs-12 text-left">
+			</div>		
+		</div>
+	</div>
+	<div class="container" id="map" style="display:none;">
+		<div style="width:auto;height:auto">
+			<img style="height:600px;width:auto" id="map_img" src=""/>
+		</div>
+	</div>
+	
+	<datalist id="places">
+		
+	</datalist>
+		
+	<script>
+		var session = new QiSession();
+		var audio = new Audio('../change_screen.ogg');
+		var state = 1;
+						
+		function quit(){
+			audio.play();
+			session.service('ALMemory').done(function(ALMemory) {
+				ALMemory.raiseEvent("Orientation/Exit", 0);
+			});
+		}
+		
+		session.service("ALMemory").then(function (ALMemory) {
+			ALMemory.subscriber("orientation/placesaid").then(function (subscriber) {
+				subscriber.signal.connect(function (state) {
+					document.getElementById("palilinjat").value = state;
+					search_routes();
+				});
+			});
+		})
+		
+		function back(){
+			audio.play();
+			if(state == 1){
+				session.service('ALMemory').done(function(ALMemory) {
+					ALMemory.raiseEvent("orientation/pali_back", 0);
+				});
+			}
+			else{
+				document.getElementById("main1").style.display = 'block';
+				document.getElementById("map").style.display = 'none';
+				state = 1;
+				session.service('ALMemory').done(function(ALMemory) {
+					ALMemory.raiseEvent("orientation/pali_map_back", 0);
+				});
+			}
+			
+		}
+		
+		function show_routes(e){
+			audio.play();
+			session.service('ALMemory').done(function(ALMemory) {
+				ALMemory.raiseEvent("orientation/route_clicked", 0);
+			});
+			state = 2;
+			route = e.id;
+			document.getElementById("back_btn").style.display = 'block';
+			document.getElementById("main1").style.display = 'none';
+			document.getElementById("map_img").src = "../site/img/reitti" + route + ".png";
+			document.getElementById("map").style.display = 'block';
+		}
+		
+		function search_routes(){
+			var palis = [ 
+					{"name":"1","stops":["amuri", "finlayson", "tampella", "tammela", "ratina", "kaakinmaa", "pyynikki", "santalahti", "kyttälä", "keskusta"]},
+					{"name":"2","stops":["finlayson", "armonkallio", "tampella", "lapinniemi", "rauhaniemi", "käpylä", "lappi", "petsamo", "TAYS", "kaleva", "tammela", "kyttälä", "sokos", "keskusta"]},
+					{"name":"3","stops":["viinikka", "nekala", "muotiala", "korkinmäki", "veisu", "nirva", "taatala", "koivistonkylä"]},
+					{"name":"4","stops":["sokos", "ratina", "kaakinmaa", "hatanpää", "hatanpään sairaala", "härmälä", "rantaperkiö", "partolan liikekeskus", "koivistonkylän prisma"]},
+					{"name":"5","stops":["kaukajärvi", "annala", "lukonmäki", "hervanta", "haihara", "turtola"]},
+					{"name":"6","stops":["koilliskeskus", "takahuhti", "kissanmaa", "hakametsä", "janka", "huikas", "ruotula"]},
+					{"name":"7","stops":["koilliskeskus", "leinola", "holvasti", "vehmainen", "linnainmaa"]},
+					{"name":"8","stops":["lentävänniemi", "pohtola", "ryydynpohja", "lielahti", "pispa", "hyhky"]},
+					{"name":"9","stops":["tesoma", "rahola", "pispala", "keskusta", "sokos", "villilä", "kalkku", "kaarila", "epilä", "hyhky" ]},
+					{"name":"10","stops":["hervanta"]},
+					{"name":"11","stops":["multisilta", "peltolammi", "keskusta", "rautaharkko", "lakalaiva", "multisilta", "ratina", "hatanpää", "palokallio", "kaakinmaa", "kyttälä"]},
+					{"name":"12","stops":["haukiluoma", "lamminpää", "tesoma", "lielahti", "epilä", "tohloppi", "ristinmäki", "ikuri"]},
+					{"name":"13","stops":["keskusta", "pispala", "pispa", "tipotien terveysasema"]},
+					{"name":"14","stops":["olkahinen", "kumpula", "tasanne", "atala", "koilliskeskus"]},
+					{"name":"15","stops":["keskusta", "kaleva", "kissanmaa", "järvensivu", "kyttälä", "ratina", "TAYS", "pohjolan palvelukeskus", "tammela"]},
+					{"name":"16","stops":["hervanta", "hallila", "turtola", "kaleva", "korkinmäki", "muotiala", "veisu", "vuohenoja", "hakametsä", "kalevan prisma"]},
+					{"name":"17","stops":["kauppi", "keskusta", "kaleva", "sokos", "kyttälä", "tammela", "kaupin sairaala", "rauhaniemi", "pohjolan palvelukeskus"]},
+					{"name":"18","stops":["kaleva", "takahuhti", "irjala", "pappila", "koilliskeskus", "kissanmaa", "huikas", "uusikylä", "janka", "pappila", "irjala", "ruotula", "linnainmaa"]},
+					{"name":"19","stops":["kauppi", "keskusta", "kaleva", "lappi", "tampella", "viola", "sokos", "kyttälä", "tammela", "pohjalan palvelukeskus"]},
+					{"name":"Teisko","stops":["teisko", "aitolahti"]}
+				];
+			if(document.getElementById("palilinjat").value != "TAYS") {
+				destination = document.getElementById("palilinjat").value.toLowerCase();
+			}
+			else{
+				destination = document.getElementById("palilinjat").value;
+			}
+			
+			session.service('ALMemory').done(function(ALMemory) {
+				ALMemory.raiseEvent("orientation/say_", destination);
+			});
+			routes_found = [];
+			while (document.getElementById("routes").firstChild) {
+				document.getElementById("routes").removeChild(document.getElementById("routes").firstChild);
+			}
+			for(i = 0; i < palis.length; ++i){
+				item = palis[i];
+				if(item["stops"].indexOf(destination) != -1){
+					routes_found.push(item);
+					
+					var new_item = document.createElement("a");
+					new_item.className = "link-round link-round-small bg-lavender whiteoutline box-shadow-thin text-center";
+					new_item.id = item["name"];
+					new_item.onclick = function(){
+						show_routes(this);
+					}
+					new_item.innerHTML = "<h3>" + item["name"] + "</h3>";
+					document.getElementById("routes").appendChild(new_item);
+				}
+			}
+			if(routes_found.length == 0 && destination.length > 0){
+				session.service('ALMemory').done(function(ALMemory) {
+					ALMemory.raiseEvent("orientation/say_", "En löytänyt täältä kulkevia pali linjoja");
+				});
+			}
+			
+		}
+		
+		/*var input = document.getElementById("palilinjat");
+		// Execute a function when the user releases a key on the keyboard
+		input.addEventListener("keyup", function(event) {
+			// Cancel the default action, if needed
+			event.preventDefault();
+			// Number 13 is the "Enter" key on the keyboard
+			if (event.keyCode === 13) {
+				// Trigger the button element with a click
+				document.getElementById("hae").click();
+				input.blur();
+			}
+		}); 
+		*/
+	</script>
+	
+	
+	
+</body>
+</html>

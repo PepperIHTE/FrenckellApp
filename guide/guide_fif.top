@@ -1,0 +1,99 @@
+topic: ~guide()
+language: fif
+
+concept:(back)[takaisin takas]
+concept:(exit)[poistu lopeta alkuun]
+concept:(more_info)[lisätietoa "kerro lisää"]
+concept:(show_map)["näytä kartalla" kartta]
+
+u:(e:onStart) ^gotoReactivate(start) Tässä lista Frenckell palvelupisteen palveluista, valitse mistä palvelusta tahtoisit minun kertovan
+
+proposal: %start $html="fin/services.html"
+
+#Joukkoliikenne
+    #Voice commanding
+u:([joukkoliikenne tkl]) ^gotoReactivate(joukkoliikenne)
+    u1:(~more_info) ^gotoReactivate(joukkoliikenne-info)
+        u2:(~back) ^gotoReactivate(joukkoliikenne)
+        u2:(~exit) $Orientation/Exit=1
+    u1:(~show_map) ^gotoReactivate(joukkoliikenne-map)
+        u2:(~back) ^gotoReactivate(joukkoliikenne)
+        u2:(~exit) $Orientation/Exit=1
+    u1:(~back) ^gotoReactivate(services)
+    #Tablet commanding
+u:(e:orientation/joukkoliikenne) ^gotoReactivate(joukkoliikenne) 
+u:(e:orientation/joukkoliikenne-info) ^gotoReactivate(joukkoliikenne-info) 
+u:(e:orientation/joukkoliikenne-map) ^gotoReactivate(joukkoliikenne-map) 
+
+#Kaupunkiympäristö
+u:([kaupunkiympäristö e:orientation/kaupunkiymparisto]) ^gotoReactivate(kaupunkiymparisto)
+    u1:([~more_info e:orientation/kaupunkiymparisto-info]) ^gotoReactivate(kaupunkiymparisto-info)
+        u2:(~back) ^gotoReactivate(kaupunkiymparisto)
+        u2:(~exit) $Orientation/Exit=1
+    u1:([~show_map e:orientation/kaupunkiymparisto-map]) ^gotoReactivate(kaupunkiymparisto-map)
+        u2:(~back) ^gotoReactivate(kaupunkiymparisto)
+        u2:(~exit) $Orientation/Exit=1
+    u1:(~back) ^gotoReactivate(services)
+u:(e:orientation/kaupunkiymparisto) ^gotoReactivate(kaupunkiymparisto) 
+u:(e:orientation/kaupunkiymparisto-info) ^gotoReactivate(kaupunkiymparisto-info) 
+u:(e:orientation/kaupunkiymparisto-map) ^gotoReactivate(kaupunkiymparisto-map)
+    
+u:(e:orientation/pysakoinninvalvonta) ^gotoReactivate(pysakoinninvalvonta)
+u:(e:orientation/pysakoinninvalvonta-info) ^gotoReactivate(pysakoinninvalvonta-info)
+u:(e:orientation/pysakoinninvalvonta-map) ^gotoReactivate(pysakoinninvalvonta-map)
+
+u:(e:orientation/kotitori) ^gotoReactivate(kotitori)
+u:(e:orientation/kotitori-info) ^gotoReactivate(kotitori-info)
+u:(e:orientation/kotitori-map) ^gotoReactivate(kotitori-map)
+
+u:(e:orientation/kassapalvelu) ^gotoReactivate(kassapalvelu)
+u:(e:orientation/kassapalvelu-info) ^gotoReactivate(kassapalvelu-info)
+u:(e:orientation/kassapalvelu-map) ^gotoReactivate(kassapalvelu-map)
+
+u:(e:orientation/visit) ^gotoReactivate(visit)
+u:(e:orientation/visit-info) ^gotoReactivate(visit-info)
+u:(e:orientation/visit-map) ^gotoReactivate(visit-map)
+
+u:(e:orientation/kasvatus) ^gotoReactivate(kasvatus)
+u:(e:orientation/kasvatus-info) ^gotoReactivate(kasvatus-info)
+u:(e:orientation/kasvatus-map) ^gotoReactivate(kasvatus-map)
+
+u:(e:orientation/services) ^gotoReactivate(services)
+
+##MAIN MENU
+proposal: %services $html="fin/services.html"
+
+##JOUKKOLIIKENNE
+proposal: %joukkoliikenne $html="fin/services-joukkoliikenne.html"
+proposal: %joukkoliikenne-info $html="fin/services-joukkoliikenne-info.html" Voit ostaa täältä matkalippuja ja kortteja, kysyä aikatauluista ja reiteistä, selvitellä ongelmatilanteita tai antaa palautetta.
+proposal: %joukkoliikenne-map $html="fin/services-joukkoliikenne-map.html" Ulko-oven lähellä on jonotuslaite. Ota jonotusnumero ja istu alas odottelemaan. Voin myös viihdyttää sinua sillä aikaa tietovisalla!
+
+##KAUPUNKIYMPÄRISTÖ
+proposal: %kaupunkiymparisto $html="fin/services-kaupunkiymparisto.html"
+proposal: %kaupunkiymparisto-info $html="fin/services-kaupunkiymparisto-info.html" Kaupunkiympäristön palvelupisteellä on usein esillä valmisteilla olevia asemakaavoja, joiden suunnitteluun on mahdollista vaikuttaa.
+proposal: %kaupunkiymparisto-map $html="fin/services-kaupunkiymparisto-map.html" Kaupunkiympäristön palvelupiste on oikealla puolellani tilan takaosassa, toiseksi viimeinen tiski.
+
+##PYSÄKÖINNINVALVONTA
+proposal: %pysakoinninvalvonta $html="fin/services-pysakointivalvonta.html" 
+proposal: %pysakoinninvalvonta-info $html="fin/services-pysakointivalvonta-info.html" Pysäköinninvalvonnassa saa neuvontaa ja sinne voi jättää oikaisuvaatimuksen. Pysäköinninvalvonnasta voi myös ostaa asukas- ja yrityspysäköintitunnuksia. 
+proposal: %pysakoinninvalvonta-map $html="fin/services-pysakointivalvonta-map.html" Pysäköinninvalvonta palvelee takanani kolmannella pisteellä. Pysäköintivirhemaksut maksetaan viereisellä pisteellä eli kassapalveluissa.
+
+##KOTITORI
+proposal: %kotitori $html="fin/services-kotitori-laitetori.html"
+proposal: %kotitori-info $html="fin/services-kotitori-laitetori-info.html" Kotitorilta löydät itsellesi tai läheisellesi sopivat palvelut. Voit kysyä heiltä mitä tahansa!
+proposal: %kotitori-map $html="fin/services-kotitori-laitetori-map.html" Kotitori on takanani tilan toisessa päädyssä.
+
+##KASSAPALVELU
+proposal: %kassapalvelu $html="fin/services-kassapalvelut.html"
+proposal: %kassapalvelu-info $html="fin/services-kassapalvelut-info.html" Kaupungin kassapalvelupiste vastaanottaa kaikkien Tampereen kaupungin laskujen maksuja sekä kaupungin yhtiöiden omistamien vuokra-asuntojen vuokramaksuja.
+proposal: %kassapalvelu-map $html="fin/services-kassapalvelut-map.html" Kassapalvelut löytyvät oikealta puoleltani infotiskin vierestä.
+
+##VISIT TAMPERE
+proposal: %visit $html="fin/services-visit.html"
+proposal: %visit-info $html="fin/services-visit-info.html" Visit Tampereelta saa matkailuneuvontaa, vinkkejä ja paljon muuta tietoa. Visit Tampere palvelee nettisivujen lisäksi puhelimitse ja sähköpostitse.
+proposal: %visit-map $html="fin/services-visit-map.html" Voit tarkastella Visit Tampereen nettisivuja isolta näytöltä, joka löytyy takanani olevien sermien takaa.
+
+##KASVATUS- JA OPETUSPALVELUT
+proposal: %kasvatus $html="fin/services-kasvatus.html" 
+proposal: %kasvatus-info $html="fin/services-kasvatus-info.html" Asiakaspalvelupiste auttaa ja opastaa lapsiperheitä erilaisissa haku- ja ilmoittautumistilanteissa.
+proposal: %kasvatus-map $html="fin/services-kasvatus-map.html" Kasvatus- ja opetuspalvelujen palvelupiste löytyy takaani, viimeinen tiski rivistössä.
